@@ -15,6 +15,26 @@ Display and customize cat images in your terminal :3
 | ![preview 0](./res/preview0.webp) | ![preview 1](./res/preview1.webp) |
 | ![preview 2](./res/preview2.webp) | ![preview 3](./res/preview3.webp) |
 
+### Fastfetch integration
+
+You can use kitget directly with Fastfetch:
+
+```bash
+kitget --square | fastfetch --file-raw -
+```
+
+This might not work on terminals supporting images. Example Bash function (to use in your `~/.bashrc`) for Kitty:
+
+```bash
+ff() {
+    stamp="$(date +%s)"
+    kitget --square -o "/tmp/kitget-$stamp"
+    clear
+    fastfetch --kitty "/tmp/kitget-$stamp" "$@"
+    rm -f "/tmp/kitget-$stamp"
+}
+```
+
 ## Installation
 
 <details>
