@@ -16,6 +16,10 @@ async fn main() -> Result<()> {
         println!("Image saved to {}", path);
     } else {
         let config = Config {
+            width: args.x,
+            height: args.y,
+            x: args.column.unwrap_or(0),
+            y: args.row.unwrap_or(0),
             ..Default::default()
         };
         print(&load_from_memory(&img)?, &config)?;

@@ -70,6 +70,22 @@ pub struct Args {
     #[arg(short, long)]
     pub output: Option<String>,
 
+    /// Print position row
+    #[arg(short, long)]
+    pub row: Option<i16>,
+
+    /// Print position column
+    #[arg(short, long)]
+    pub column: Option<u16>,
+
+    /// Print size X
+    #[arg(short)]
+    pub x: Option<u32>,
+
+    /// Print size Y
+    #[arg(short)]
+    pub y: Option<u32>,
+
     /// Display copyright information
     #[arg(long)]
     copyright: bool,
