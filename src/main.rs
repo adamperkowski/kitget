@@ -1,19 +1,29 @@
-use anyhow::Result;
 use image::load_from_memory;
-use kitget::api::{Options, fetch};
-use kitget::cli::Args;
 use viuer::{Config, print};
+
+use kitget::{
+    api::{Options, fetch},
+    cli::Args,
+    error::Result,
+};
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let args = Args::get();
+    if let Err(e) = run(Args::get()).await {
+        e.pretty();
+        std::process::exit(1);
+    }
 
+    Ok(())
+}
+
+async fn run(args: Args) -> Result<()> {
     let options = Options::from_args(&args);
     let img = fetch(options).await?;
 
     if let Some(path) = args.output {
         std::fs::write(&path, &img)?;
-        println!("Image saved to {}", path);
+        println!("😼 kitteh saved to {} 😼", path);
     } else {
         let config = Config {
             width: args.x,

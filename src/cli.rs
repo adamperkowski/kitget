@@ -6,7 +6,7 @@ const LICENSE: &str = include_str!("../LICENSE");
 #[derive(Parser)]
 #[command(version, about)]
 pub struct Args {
-    /// animated kitteh WOW :3
+    /// animated kitteh WOW 😻
     #[arg(short, long)]
     pub gif: bool,
 
@@ -99,7 +99,7 @@ impl Args {
             let current_year = 1970
                 + (SystemTime::now()
                     .duration_since(UNIX_EPOCH)
-                    .expect("Time went backwards :(")
+                    .expect("Time went backwards")
                     .as_secs()
                     / (365 * 24 * 60 * 60));
 

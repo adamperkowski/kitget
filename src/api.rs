@@ -1,4 +1,4 @@
-use anyhow::{Result, anyhow};
+use crate::error::{Error, Result};
 use bytes::Bytes;
 use reqwest::StatusCode;
 
@@ -52,7 +52,7 @@ impl Options {
 
         if let Some(tags) = self.tags {
             if self.gif {
-                return Err(anyhow!("GIFs do not support tags"));
+                return Err(Error::GIFsNoTags);
             }
 
             url.push_str(&format!("/{}", tags));
@@ -68,7 +68,7 @@ impl Options {
         }
         if self.mono {
             if self.red.is_some() || self.green.is_some() || self.blue.is_some() {
-                return Err(anyhow!("Monochrome does not support color (duhh)"));
+                return Err(Error::MonoColors);
             }
 
             url.push_str("&filter=mono");
@@ -82,7 +82,7 @@ impl Options {
         }
         if let Some(blur) = self.blur {
             if blur < 0.3 || blur > 1000.0 {
-                return Err(anyhow!("Blur must be between 0.3 and 1000"));
+                return Err(Error::BlurValue);
             }
 
             url.push_str(&format!("&blur={}", blur));
@@ -101,21 +101,21 @@ impl Options {
 
         if let Some(red) = self.red {
             if self.green.is_none() || self.blue.is_none() {
-                return Err(anyhow!("Red, green, and blue must be set together"));
+                return Err(Error::RGBColors);
             }
 
             url.push_str(&format!("&r={}", red));
         }
         if let Some(green) = self.green {
             if self.red.is_none() || self.blue.is_none() {
-                return Err(anyhow!("Red, green, and blue must be set together"));
+                return Err(Error::RGBColors);
             }
 
             url.push_str(&format!("&g={}", green));
         }
         if let Some(blue) = self.blue {
             if self.red.is_none() || self.green.is_none() {
-                return Err(anyhow!("Red, green, and blue must be set together"));
+                return Err(Error::RGBColors);
             }
 
             url.push_str(&format!("&b={}", blue));
@@ -147,12 +147,7 @@ pub async fn fetch(options: Options) -> Result<Bytes> {
 fn handle_status(code: &StatusCode) -> Result<()> {
     match *code {
         StatusCode::OK => Ok(()),
-        StatusCode::BAD_REQUEST => Err(anyhow!("Bad request")),
-        StatusCode::NOT_FOUND => Err(anyhow!("kitteh not found :(")),
-        StatusCode::INTERNAL_SERVER_ERROR => Err(anyhow!("Internal server error")),
-        StatusCode::BAD_GATEWAY => Err(anyhow!("Bad gateway")),
-        StatusCode::SERVICE_UNAVAILABLE => Err(anyhow!("Service unavailable")),
-        StatusCode::TOO_MANY_REQUESTS => Err(anyhow!("Too many requests")),
-        _ => Err(anyhow!("Fetching: {}", code.to_string())),
+        StatusCode::NOT_FOUND => Err(Error::NotFound),
+        _ => Err(Error::Request(code.to_string().to_lowercase())),
     }
 }

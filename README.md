@@ -2,7 +2,7 @@
 
 # kitget
 
-Display and customize cat images in your terminal :3
+Display and customize cat images in your terminal :smirk_cat:
 
 ![kitget](./res/kitget.gif)
 
