@@ -1,5 +1,6 @@
 use anyhow::{Result, anyhow};
 use bytes::Bytes;
+use reqwest::StatusCode;
 
 const URL: &str = "https://cataas.com/cat";
 
@@ -139,5 +140,19 @@ impl Options {
 
 pub async fn fetch(options: Options) -> Result<Bytes> {
     let response = reqwest::get(options.build()?).await?;
+    handle_status(&response.status())?;
     Ok(response.bytes().await?)
+}
+
+fn handle_status(code: &StatusCode) -> Result<()> {
+    match *code {
+        StatusCode::OK => Ok(()),
+        StatusCode::BAD_REQUEST => Err(anyhow!("Bad request")),
+        StatusCode::NOT_FOUND => Err(anyhow!("kitteh not found :(")),
+        StatusCode::INTERNAL_SERVER_ERROR => Err(anyhow!("Internal server error")),
+        StatusCode::BAD_GATEWAY => Err(anyhow!("Bad gateway")),
+        StatusCode::SERVICE_UNAVAILABLE => Err(anyhow!("Service unavailable")),
+        StatusCode::TOO_MANY_REQUESTS => Err(anyhow!("Too many requests")),
+        _ => Err(anyhow!("Fetching: {}", code.to_string())),
+    }
 }
