@@ -1,6 +1,6 @@
 [package]
 name = "kitget"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Adam Perkowski <adas1per@protonmail.com>"]
 edition = "2024"
 description = "Display and customize cat images in your terminal 😼"

@@ -2,7 +2,7 @@
 //!
 //! Display and customize cat images in your terminal 😼
 //!
-//! ![kitget](https://raw.githubusercontent.com/adamperkowski/kitget/refs/tags/v0.0.1/res/kitget.gif)
+//! ![kitget](https://raw.githubusercontent.com/adamperkowski/kitget/refs/tags/v0.0.2/res/kitget.gif)
 //!
 //! The library provides a wrapper around [Kevin Balicot](https://buymeacoffee.com/kevinbalicot)'s [Cat as a service API](https://cataas.com).
 
