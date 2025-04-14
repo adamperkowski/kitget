@@ -1,28 +1,78 @@
+//! Main fetching functionality
+
 use crate::error::{Error, Result};
 use bytes::Bytes;
 use reqwest::StatusCode;
 
+/// Base URL for the Cat as a Service API
 const URL: &str = "https://cataas.com/cat";
 
+/// Customization options ([API docs](https://cataas.com/doc.html))
 pub struct Options {
-    gif: bool,
-    tags: Option<String>,
-    display: Option<String>,
-    square: bool,
-    mono: bool,
-    width: Option<usize>,
-    height: Option<usize>,
-    blur: Option<f32>,
-    red: Option<u8>,
-    green: Option<u8>,
-    blue: Option<u8>,
-    brightness: Option<f32>,
-    saturation: Option<f32>,
-    hue: Option<f32>,
-    lightness: Option<f32>,
+    /// Whether to fetch a gif instead of a static image
+    ///
+    /// `/gif`
+    pub gif: bool,
+    /// Tags to filter the images by
+    ///
+    /// `/:tags`
+    pub tags: Option<String>,
+    /// Text to display on the image
+    ///
+    /// `/says/:display`
+    pub display: Option<String>,
+    /// Whether to query only square images
+    ///
+    /// `?type=square`
+    pub square: bool,
+    /// Whether to query only monochrome images
+    ///
+    /// `?filter=mono`
+    pub mono: bool,
+    /// Width of the image
+    ///
+    /// `?width=:width`
+    pub width: Option<usize>,
+    /// Height of the image
+    ///
+    /// `?height=:height`
+    pub height: Option<usize>,
+    /// Blur value (0.3 - 1000.0)
+    ///
+    /// `?blur=:blur`
+    pub blur: Option<f32>,
+    /// Custom RGB filter values
+    ///
+    /// `?filter=custom&r=:red&g=:green&b=:blue`
+    pub red: Option<u8>,
+    /// Custom RGB filter values
+    ///
+    /// `?filter=custom&r=:red&g=:green&b=:blue`
+    pub green: Option<u8>,
+    /// Custom RGB filter values
+    ///
+    /// `?filter=custom&r=:red&g=:green&b=:blue`
+    pub blue: Option<u8>,
+    /// Brightness value
+    ///
+    /// `?filter=custom&brightness=:brightness`
+    pub brightness: Option<f32>,
+    /// Saturation value
+    ///
+    /// `?filter=custom&saturation=:saturation`
+    pub saturation: Option<f32>,
+    /// Hue value
+    ///
+    /// `?filter=custom&hue=:hue`
+    pub hue: Option<f32>,
+    /// Lightness value
+    ///
+    /// `?filter=custom&lightness=:lightness`
+    pub lightness: Option<f32>,
 }
 
 impl Options {
+    /// Create a new [`Options`] instance from the command-line arguments struct
     pub fn from_args(args: &crate::cli::Args) -> Self {
         Self {
             gif: args.gif,
@@ -43,6 +93,7 @@ impl Options {
         }
     }
 
+    /// Build the API request URL
     pub fn build(self) -> Result<String> {
         let mut url = String::from(URL);
 
@@ -138,12 +189,14 @@ impl Options {
     }
 }
 
+/// Fetch the image from the API
 pub async fn fetch(options: Options) -> Result<Bytes> {
     let response = reqwest::get(options.build()?).await?;
     handle_status(&response.status())?;
     Ok(response.bytes().await?)
 }
 
+/// Handle the response status code
 fn handle_status(code: &StatusCode) -> Result<()> {
     match *code {
         StatusCode::OK => Ok(()),

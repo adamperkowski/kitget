@@ -1,8 +1,12 @@
+//! Command-line interface for kitget
+
 use clap::Parser;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+/// kitget's license text
 const LICENSE: &str = include_str!("../LICENSE");
 
+/// Command-line arguments for kitget CLI
 #[derive(Parser)]
 #[command(version, about)]
 pub struct Args {
@@ -92,6 +96,7 @@ pub struct Args {
 }
 
 impl Args {
+    /// Parse command-line arguments and handle the copyright flag
     pub fn get() -> Self {
         let args = Args::parse();
 

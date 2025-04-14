@@ -1,5 +1,8 @@
+//! Error handling module
+
 use thiserror::Error as ThisError;
 
+/// Custom error type specification for kitget
 #[derive(ThisError, Debug)]
 pub enum Error {
     #[error("io error: {0}")]
@@ -28,9 +31,11 @@ pub enum Error {
 }
 
 impl Error {
+    /// Pretty-print the error message
     pub fn pretty(&self) {
         println!("😿 {} 😿", self);
     }
 }
 
+/// Result type alias for kitget
 pub type Result<T> = std::result::Result<T, Error>;
