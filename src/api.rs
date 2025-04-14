@@ -81,7 +81,7 @@ impl Options {
             url.push_str(&format!("&height={}", height));
         }
         if let Some(blur) = self.blur {
-            if blur < 0.3 || blur > 1000.0 {
+            if !(0.3..=1000.0).contains(&blur) {
                 return Err(Error::BlurValue);
             }
 

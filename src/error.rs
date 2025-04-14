@@ -29,7 +29,7 @@ pub enum Error {
 
 impl Error {
     pub fn pretty(&self) {
-        println!("😿 {} 😿", self.to_string());
+        println!("😿 {} 😿", self);
     }
 }
 
