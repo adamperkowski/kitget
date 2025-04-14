@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: 'cargo'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    assignees:
+      - 'adamperkowski'
+    labels:
+      - 'deps'
+    commit-message:
+      prefix: 'chore(deps.cargo)'
