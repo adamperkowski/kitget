@@ -29,7 +29,7 @@ opt-level = "z"
 bytes = "1.10.1"
 clap = { version = "4.5.38", features = ["derive", "color", "error-context", "help", "usage", "std"], default-features = false }
 image = { version = "0.25.6", features = ["gif", "jpeg", "png", "tiff", "webp"], default-features = false }
-reqwest = { version = "0.12.15", features = ["default-tls", "json"], default-features = false }
+reqwest = { version = "0.12.18", features = ["default-tls", "json"], default-features = false }
 thiserror = { version = "2.0.12", default-features = false }
 tokio = { version = "1.45.1", features = ["rt-multi-thread", "macros"], default-features = false }
 viuer = "0.9.1"
