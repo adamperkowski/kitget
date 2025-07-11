@@ -106,10 +106,10 @@ impl Options {
                 return Err(Error::GIFsNoTags);
             }
 
-            url.push_str(&format!("/{}", tags));
+            url.push_str(&format!("/{tags}"));
         }
         if let Some(display) = self.display {
-            url.push_str(&format!("/says/{}", display));
+            url.push_str(&format!("/says/{display}"));
         }
 
         url.push_str("?position=center");
@@ -126,17 +126,17 @@ impl Options {
         }
 
         if let Some(width) = self.width {
-            url.push_str(&format!("&width={}", width));
+            url.push_str(&format!("&width={width}"));
         }
         if let Some(height) = self.height {
-            url.push_str(&format!("&height={}", height));
+            url.push_str(&format!("&height={height}"));
         }
         if let Some(blur) = self.blur {
             if !(0.3..=1000.0).contains(&blur) {
                 return Err(Error::BlurValue);
             }
 
-            url.push_str(&format!("&blur={}", blur));
+            url.push_str(&format!("&blur={blur}"));
         }
 
         if self.red.is_some()
@@ -155,34 +155,34 @@ impl Options {
                 return Err(Error::RGBColors);
             }
 
-            url.push_str(&format!("&r={}", red));
+            url.push_str(&format!("&r={red}"));
         }
         if let Some(green) = self.green {
             if self.red.is_none() || self.blue.is_none() {
                 return Err(Error::RGBColors);
             }
 
-            url.push_str(&format!("&g={}", green));
+            url.push_str(&format!("&g={green}"));
         }
         if let Some(blue) = self.blue {
             if self.red.is_none() || self.green.is_none() {
                 return Err(Error::RGBColors);
             }
 
-            url.push_str(&format!("&b={}", blue));
+            url.push_str(&format!("&b={blue}"));
         }
 
         if let Some(brightness) = self.brightness {
-            url.push_str(&format!("&brightness={}", brightness));
+            url.push_str(&format!("&brightness={brightness}"));
         }
         if let Some(saturation) = self.saturation {
-            url.push_str(&format!("&saturation={}", saturation));
+            url.push_str(&format!("&saturation={saturation}"));
         }
         if let Some(hue) = self.hue {
-            url.push_str(&format!("&hue={}", hue));
+            url.push_str(&format!("&hue={hue}"));
         }
         if let Some(lightness) = self.lightness {
-            url.push_str(&format!("&lightness={}", lightness));
+            url.push_str(&format!("&lightness={lightness}"));
         }
 
         Ok(url)

@@ -33,7 +33,7 @@ pub enum Error {
 impl Error {
     /// Pretty-print the error message
     pub fn pretty(&self) {
-        println!("😿 {} 😿", self);
+        println!("😿 {self} 😿");
     }
 }
 

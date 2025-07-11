@@ -23,7 +23,7 @@ async fn run(args: Args) -> Result<()> {
 
     if let Some(path) = args.output {
         std::fs::write(&path, &img)?;
-        println!("😼 kitteh saved to {} 😼", path);
+        println!("😼 kitteh saved to {path} 😼");
     } else {
         let config = Config {
             width: args.x,
