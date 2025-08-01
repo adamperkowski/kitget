@@ -27,7 +27,7 @@ opt-level = "z"
 
 [dependencies]
 bytes = "1.10.1"
-clap = { version = "4.5.40", features = ["derive", "color", "error-context", "help", "usage", "std"], default-features = false }
+clap = { version = "4.5.42", features = ["derive", "color", "error-context", "help", "usage", "std"], default-features = false }
 image = { version = "0.25.6", features = ["gif", "jpeg", "png", "tiff", "webp"], default-features = false }
 reqwest = { version = "0.12.22", features = ["default-tls", "json"], default-features = false }
 thiserror = { version = "2.0.12", default-features = false }
