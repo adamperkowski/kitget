@@ -49,6 +49,29 @@ paru -S kitget
 
 </details>
 <details>
+<summary>Nix</summary>
+
+### Nixpkgs
+
+[kitget](https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/ki/kitget/package.nix) is available in Nixpkgs.
+It can be installed using a variety of methods documented in [NixOS Search](https://search.nixos.org/packages?show=kitget).
+
+### Flakes
+
+There is also a [flake](/flake.nix) available. You can run it directly with:
+
+```bash
+nix run github:adamperkowski/kitget
+```
+
+or install it by adding the following to your flake inputs:
+
+```nix
+inputs.kitget.url = "github:adamperkowski/kitget";
+```
+
+</details>
+<details>
 <summary>Cargo</summary>
 
 For all systems supported by Rust, you can install kitget using Cargo:
