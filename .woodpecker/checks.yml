@@ -1,0 +1,16 @@
+when:
+  - event: [push, pull_request]
+    branch: main
+
+steps:
+  - name: commit message
+    image: ghcr.io/adamperkowski/commits:latest
+    commands:
+      - check-commit-message "$(git log -1 --pretty=%B)"
+  - name: rust
+    image: rust
+    commands:
+      - rustup component add rustfmt
+      - rustup component add clippy
+      - cargo fmt --all --check
+      - cargo clippy -- -D warnings
