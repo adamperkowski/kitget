@@ -4,7 +4,7 @@ when:
 
 steps:
   - name: commit message
-    image: codeberg.org/adamperkowski/commits:latest
+    image: codeberg.org/koibtw/commits:latest
     commands:
       - check-commit-message "$(git log -1 --pretty=%B)"
   - name: rust

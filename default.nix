@@ -24,7 +24,7 @@ rustPlatform.buildRustPackage {
   meta = {
     inherit (p) description homepage;
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ adamperkowski ];
+    maintainers = with lib.maintainers; [ koi ];
     mainProgram = "kitget";
   };
 }

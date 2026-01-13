@@ -109,9 +109,9 @@ impl Args {
                     / (365 * 24 * 60 * 60));
 
             let copyright = if current_year > 2025 {
-                &format!("Copyright (c) 2025-{current_year} Adam Perkowski")
+                &format!("Copyright (c) 2025-{current_year} koi")
             } else {
-                "Copyright (c) 2025 Adam Perkowski"
+                "Copyright (c) 2025 koi"
             };
 
             println!(

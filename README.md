@@ -61,13 +61,13 @@ It can be installed using a variety of methods documented in [NixOS Search](http
 There is also a [flake](/flake.nix) available. You can run it directly with:
 
 ```bash
-nix run github:adamperkowski/kitget
+nix run github:koibtw/kitget
 ```
 
 or install it by adding the following to your flake inputs:
 
 ```nix
-inputs.kitget.url = "github:adamperkowski/kitget";
+inputs.kitget.url = "github:koibtw/kitget";
 ```
 
 </details>
